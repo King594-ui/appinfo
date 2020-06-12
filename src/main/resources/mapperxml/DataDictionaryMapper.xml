@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mapper.DataDictionaryMapper">
+<mapper namespace="com.bdqn.dao.appDataDictionaryColler">
   <resultMap id="BaseResultMap" type="com.bdqn.mapper.DataDictionary">
     <!--@mbg.generated-->
     <!--@Table data_dictionary-->
@@ -140,4 +140,32 @@
       modify_date = #{modifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getappcategorylist" resultType="com.bdqn.mapper.DataDictionary">
+    SELECT value_id,value_name from data_dictionary where type_code='APP_STATUS'
+  </select>
+  <select id="getappcategorylist1" resultType="com.bdqn.mapper.DataDictionary">
+    SELECT value_id,value_name from data_dictionary where type_code='APP_FLATFORM'
+  </select>
+  <select id="getappcategorylist2" resultType="com.bdqn.mapper.AppCategory">
+      SELECT  id,category_name
+    FROM app_category
+        <where>
+          <if test="level != null and level != ''">
+            category_code LIke concat('%',#{level,jdbcType=VARCHAR},'%')
+          </if>
+          <if test="id!=null">
+          or  parent_id =#{id,jdbcType=BIGINT}
+          </if>
+        </where>
+  </select>
+  <select id="categorylevellist" resultType="com.bdqn.mapper.AppCategory">
+    select * from app_category where parent_id=#{id}
+  </select>
+<!--  <select id="getappcategorylist2" resultType="com.bdqn.mapper.AppCategory">
+    SELECT parent_id,category_name from app_category where parent_id=0
+  </select>
+  <select id="getappcategorylist3" resultType="com.bdqn.mapper.AppCategory">
+    SELECT parent_id,category_name FROM app_category
+    where parent_id=1 or parent_id=2
+  </select>-->
 </mapper>

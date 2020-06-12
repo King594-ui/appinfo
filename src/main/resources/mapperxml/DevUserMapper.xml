@@ -22,5 +22,25 @@
         a.version_id,
       (select v.version_no from app_version v where  v.id=a.version_id) as versionNo
         from app_info a
+        <where>
+          <if test="querySoftwareName != null and querySoftwareName != ''">
+             a.software_name LIKE concat('%',#{querySoftwareName,jdbcType=VARCHAR},'%')
+          </if>
+          <if test="queryStatus != null ">
+              and a.status=#{queryStatus,jdbcType=BIGINT}
+          </if>
+          <if test="queryFlatformId != null ">
+            and a.flatform_id=#{queryFlatformId,jdbcType=BIGINT}
+          </if>
+          <if test="queryCategoryLevel1 != null ">
+            and category_level1=#{queryCategoryLevel1,jdbcType=BIGINT}
+          </if>
+          <if test="queryCategoryLevel2 != null ">
+            and category_level2=#{queryCategoryLevel2,jdbcType=BIGINT}
+          </if>
+          <if test="queryCategoryLevel3 != null ">
+            and category_level3=#{queryCategoryLevel3,jdbcType=BIGINT}
+          </if>
+        </where>
   </select>
 </mapper>

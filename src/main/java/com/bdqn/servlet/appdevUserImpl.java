@@ -30,7 +30,12 @@ public class appdevUserImpl implements appdevUser {
     }
 
     @Override
-    public List<AppInfo> getAppinfoList() {
-        return appdevuserdao.getAppinfoList();
+    public List<AppInfo> getAppinfoList(String querySoftwareName,
+                                        Long queryStatus,
+                                        Long queryFlatformId,
+                                        Long queryCategoryLevel1,
+                                        Long queryCategoryLevel2,
+                                        Long queryCategoryLevel3) {
+        return appdevuserdao.getAppinfoList(querySoftwareName,queryStatus,queryFlatformId,queryCategoryLevel1,queryCategoryLevel2,queryCategoryLevel3);
     }
 }

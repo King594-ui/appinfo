@@ -13,7 +13,7 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="x_content">
-				<form method="post" action="list">
+				<form method="post" action="/list1">
 					<input type="hidden" name="pageIndex" value="1" />
 			    <ul>
 					<li>
@@ -30,12 +30,12 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">APP状态</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<select name="queryStatus" class="form-control">
-									<c:if test="${statusList != null }">
+									<c:if test="${statusList!= null }">
 									   <option value="">--请选择--</option>
-									   <c:forEach var="dataDictionary" items="${statusList}">
-									   		<option <c:if test="${dataDictionary.valueId == queryStatus }">selected="selected"</c:if>
-									   		value="${dataDictionary.valueId}">${dataDictionary.valueName}</option>
-									   </c:forEach>
+										<c:forEach var="dataDictionary" items="${statusList}">
+											<option <c:if test="${dataDictionary.valueId ==queryStatus }">selected="selected"</c:if>
+													value="${dataDictionary.valueId}">${dataDictionary.valueName}</option>
+										</c:forEach>
 									</c:if>
         						</select>
 							</div>
