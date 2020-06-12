@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/.gitignore
+.idea/MyBatisCodeHelperDatasource.xml
+.idea/compiler.xml
+.idea/dataSources.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/uiDesigner.xml
+src/main/test/
+target/
