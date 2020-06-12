@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.AdPromotionMapper">
+  <resultMap id="BaseResultMap" type="com.bdqn.mapper.AdPromotion">
+    <!--@mbg.generated-->
+    <!--@Table ad_promotion-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="app_id" jdbcType="BIGINT" property="appId" />
+    <result column="ad_pic_path" jdbcType="VARCHAR" property="adPicPath" />
+    <result column="ad_pv" jdbcType="BIGINT" property="adPv" />
+    <result column="carousel_position" jdbcType="BIGINT" property="carouselPosition" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+    <result column="creation_date" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="modify_by" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, app_id, ad_pic_path, ad_pv, carousel_position, start_time, end_time, created_by, 
+    creation_date, modify_by, modify_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from ad_promotion
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from ad_promotion
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bdqn.mapper.AdPromotion" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into ad_promotion (app_id, ad_pic_path, ad_pv, 
+      carousel_position, start_time, end_time, 
+      created_by, creation_date, modify_by, 
+      modify_date)
+    values (#{appId,jdbcType=BIGINT}, #{adPicPath,jdbcType=VARCHAR}, #{adPv,jdbcType=BIGINT}, 
+      #{carouselPosition,jdbcType=BIGINT}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{createdBy,jdbcType=BIGINT}, #{creationDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, 
+      #{modifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bdqn.mapper.AdPromotion" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into ad_promotion
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="adPicPath != null">
+        ad_pic_path,
+      </if>
+      <if test="adPv != null">
+        ad_pv,
+      </if>
+      <if test="carouselPosition != null">
+        carousel_position,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="creationDate != null">
+        creation_date,
+      </if>
+      <if test="modifyBy != null">
+        modify_by,
+      </if>
+      <if test="modifyDate != null">
+        modify_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appId != null">
+        #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="adPicPath != null">
+        #{adPicPath,jdbcType=VARCHAR},
+      </if>
+      <if test="adPv != null">
+        #{adPv,jdbcType=BIGINT},
+      </if>
+      <if test="carouselPosition != null">
+        #{carouselPosition,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="creationDate != null">
+        #{creationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null">
+        #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bdqn.mapper.AdPromotion">
+    <!--@mbg.generated-->
+    update ad_promotion
+    <set>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="adPicPath != null">
+        ad_pic_path = #{adPicPath,jdbcType=VARCHAR},
+      </if>
+      <if test="adPv != null">
+        ad_pv = #{adPv,jdbcType=BIGINT},
+      </if>
+      <if test="carouselPosition != null">
+        carousel_position = #{carouselPosition,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="creationDate != null">
+        creation_date = #{creationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null">
+        modify_by = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bdqn.mapper.AdPromotion">
+    <!--@mbg.generated-->
+    update ad_promotion
+    set app_id = #{appId,jdbcType=BIGINT},
+      ad_pic_path = #{adPicPath,jdbcType=VARCHAR},
+      ad_pv = #{adPv,jdbcType=BIGINT},
+      carousel_position = #{carouselPosition,jdbcType=BIGINT},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      creation_date = #{creationDate,jdbcType=TIMESTAMP},
+      modify_by = #{modifyBy,jdbcType=BIGINT},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

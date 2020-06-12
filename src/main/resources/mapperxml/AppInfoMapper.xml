@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.AppInfoMapper">
+  <resultMap id="BaseResultMap" type="com.bdqn.mapper.AppInfo">
+    <!--@mbg.generated-->
+    <!--@Table app_info-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="software_name" jdbcType="VARCHAR" property="softwareName" />
+    <result column="apk_name" jdbcType="VARCHAR" property="apkName" />
+    <result column="support_rom" jdbcType="VARCHAR" property="supportRom" />
+    <result column="interface_language" jdbcType="VARCHAR" property="interfaceLanguage" />
+    <result column="software_size" jdbcType="DECIMAL" property="softwareSize" />
+    <result column="update_date" jdbcType="DATE" property="updateDate" />
+    <result column="dev_id" jdbcType="BIGINT" property="devId" />
+    <result column="app_info" jdbcType="VARCHAR" property="appInfo" />
+    <result column="status" jdbcType="BIGINT" property="status" />
+    <result column="on_sale_date" jdbcType="TIMESTAMP" property="onSaleDate" />
+    <result column="off_sale_date" jdbcType="TIMESTAMP" property="offSaleDate" />
+    <result column="flatform_id" jdbcType="BIGINT" property="flatformId" />
+    <result column="category_level3" jdbcType="BIGINT" property="categoryLevel3" />
+    <result column="downloads" jdbcType="BIGINT" property="downloads" />
+    <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+    <result column="creation_date" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="modify_by" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="category_level1" jdbcType="BIGINT" property="categoryLevel1" />
+    <result column="category_level2" jdbcType="BIGINT" property="categoryLevel2" />
+    <result column="logo_pic_path" jdbcType="VARCHAR" property="logoPicPath" />
+    <result column="logo_loc_path" jdbcType="VARCHAR" property="logoLocPath" />
+    <result column="version_id" jdbcType="BIGINT" property="versionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, software_name, apk_name, support_rom, interface_language, software_size, update_date, 
+    dev_id, app_info, `status`, on_sale_date, off_sale_date, flatform_id, category_level3, 
+    downloads, created_by, creation_date, modify_by, modify_date, category_level1, category_level2, 
+    logo_pic_path, logo_loc_path, version_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from app_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from app_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bdqn.mapper.AppInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into app_info (software_name, apk_name, support_rom, 
+      interface_language, software_size, update_date, 
+      dev_id, app_info, `status`, 
+      on_sale_date, off_sale_date, flatform_id, 
+      category_level3, downloads, created_by, 
+      creation_date, modify_by, modify_date, 
+      category_level1, category_level2, logo_pic_path, 
+      logo_loc_path, version_id)
+    values (#{softwareName,jdbcType=VARCHAR}, #{apkName,jdbcType=VARCHAR}, #{supportRom,jdbcType=VARCHAR}, 
+      #{interfaceLanguage,jdbcType=VARCHAR}, #{softwareSize,jdbcType=DECIMAL}, #{updateDate,jdbcType=DATE}, 
+      #{devId,jdbcType=BIGINT}, #{appInfo,jdbcType=VARCHAR}, #{status,jdbcType=BIGINT}, 
+      #{onSaleDate,jdbcType=TIMESTAMP}, #{offSaleDate,jdbcType=TIMESTAMP}, #{flatformId,jdbcType=BIGINT}, 
+      #{categoryLevel3,jdbcType=BIGINT}, #{downloads,jdbcType=BIGINT}, #{createdBy,jdbcType=BIGINT}, 
+      #{creationDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{categoryLevel1,jdbcType=BIGINT}, #{categoryLevel2,jdbcType=BIGINT}, #{logoPicPath,jdbcType=VARCHAR}, 
+      #{logoLocPath,jdbcType=VARCHAR}, #{versionId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bdqn.mapper.AppInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into app_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="softwareName != null">
+        software_name,
+      </if>
+      <if test="apkName != null">
+        apk_name,
+      </if>
+      <if test="supportRom != null">
+        support_rom,
+      </if>
+      <if test="interfaceLanguage != null">
+        interface_language,
+      </if>
+      <if test="softwareSize != null">
+        software_size,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="devId != null">
+        dev_id,
+      </if>
+      <if test="appInfo != null">
+        app_info,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="onSaleDate != null">
+        on_sale_date,
+      </if>
+      <if test="offSaleDate != null">
+        off_sale_date,
+      </if>
+      <if test="flatformId != null">
+        flatform_id,
+      </if>
+      <if test="categoryLevel3 != null">
+        category_level3,
+      </if>
+      <if test="downloads != null">
+        downloads,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="creationDate != null">
+        creation_date,
+      </if>
+      <if test="modifyBy != null">
+        modify_by,
+      </if>
+      <if test="modifyDate != null">
+        modify_date,
+      </if>
+      <if test="categoryLevel1 != null">
+        category_level1,
+      </if>
+      <if test="categoryLevel2 != null">
+        category_level2,
+      </if>
+      <if test="logoPicPath != null">
+        logo_pic_path,
+      </if>
+      <if test="logoLocPath != null">
+        logo_loc_path,
+      </if>
+      <if test="versionId != null">
+        version_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="softwareName != null">
+        #{softwareName,jdbcType=VARCHAR},
+      </if>
+      <if test="apkName != null">
+        #{apkName,jdbcType=VARCHAR},
+      </if>
+      <if test="supportRom != null">
+        #{supportRom,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceLanguage != null">
+        #{interfaceLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="softwareSize != null">
+        #{softwareSize,jdbcType=DECIMAL},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="devId != null">
+        #{devId,jdbcType=BIGINT},
+      </if>
+      <if test="appInfo != null">
+        #{appInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIGINT},
+      </if>
+      <if test="onSaleDate != null">
+        #{onSaleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offSaleDate != null">
+        #{offSaleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flatformId != null">
+        #{flatformId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryLevel3 != null">
+        #{categoryLevel3,jdbcType=BIGINT},
+      </if>
+      <if test="downloads != null">
+        #{downloads,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="creationDate != null">
+        #{creationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null">
+        #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryLevel1 != null">
+        #{categoryLevel1,jdbcType=BIGINT},
+      </if>
+      <if test="categoryLevel2 != null">
+        #{categoryLevel2,jdbcType=BIGINT},
+      </if>
+      <if test="logoPicPath != null">
+        #{logoPicPath,jdbcType=VARCHAR},
+      </if>
+      <if test="logoLocPath != null">
+        #{logoLocPath,jdbcType=VARCHAR},
+      </if>
+      <if test="versionId != null">
+        #{versionId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bdqn.mapper.AppInfo">
+    <!--@mbg.generated-->
+    update app_info
+    <set>
+      <if test="softwareName != null">
+        software_name = #{softwareName,jdbcType=VARCHAR},
+      </if>
+      <if test="apkName != null">
+        apk_name = #{apkName,jdbcType=VARCHAR},
+      </if>
+      <if test="supportRom != null">
+        support_rom = #{supportRom,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceLanguage != null">
+        interface_language = #{interfaceLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="softwareSize != null">
+        software_size = #{softwareSize,jdbcType=DECIMAL},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="devId != null">
+        dev_id = #{devId,jdbcType=BIGINT},
+      </if>
+      <if test="appInfo != null">
+        app_info = #{appInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=BIGINT},
+      </if>
+      <if test="onSaleDate != null">
+        on_sale_date = #{onSaleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offSaleDate != null">
+        off_sale_date = #{offSaleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flatformId != null">
+        flatform_id = #{flatformId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryLevel3 != null">
+        category_level3 = #{categoryLevel3,jdbcType=BIGINT},
+      </if>
+      <if test="downloads != null">
+        downloads = #{downloads,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="creationDate != null">
+        creation_date = #{creationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null">
+        modify_by = #{modifyBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryLevel1 != null">
+        category_level1 = #{categoryLevel1,jdbcType=BIGINT},
+      </if>
+      <if test="categoryLevel2 != null">
+        category_level2 = #{categoryLevel2,jdbcType=BIGINT},
+      </if>
+      <if test="logoPicPath != null">
+        logo_pic_path = #{logoPicPath,jdbcType=VARCHAR},
+      </if>
+      <if test="logoLocPath != null">
+        logo_loc_path = #{logoLocPath,jdbcType=VARCHAR},
+      </if>
+      <if test="versionId != null">
+        version_id = #{versionId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bdqn.mapper.AppInfo">
+    <!--@mbg.generated-->
+    update app_info
+    set software_name = #{softwareName,jdbcType=VARCHAR},
+      apk_name = #{apkName,jdbcType=VARCHAR},
+      support_rom = #{supportRom,jdbcType=VARCHAR},
+      interface_language = #{interfaceLanguage,jdbcType=VARCHAR},
+      software_size = #{softwareSize,jdbcType=DECIMAL},
+      update_date = #{updateDate,jdbcType=DATE},
+      dev_id = #{devId,jdbcType=BIGINT},
+      app_info = #{appInfo,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=BIGINT},
+      on_sale_date = #{onSaleDate,jdbcType=TIMESTAMP},
+      off_sale_date = #{offSaleDate,jdbcType=TIMESTAMP},
+      flatform_id = #{flatformId,jdbcType=BIGINT},
+      category_level3 = #{categoryLevel3,jdbcType=BIGINT},
+      downloads = #{downloads,jdbcType=BIGINT},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      creation_date = #{creationDate,jdbcType=TIMESTAMP},
+      modify_by = #{modifyBy,jdbcType=BIGINT},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      category_level1 = #{categoryLevel1,jdbcType=BIGINT},
+      category_level2 = #{categoryLevel2,jdbcType=BIGINT},
+      logo_pic_path = #{logoPicPath,jdbcType=VARCHAR},
+      logo_loc_path = #{logoLocPath,jdbcType=VARCHAR},
+      version_id = #{versionId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

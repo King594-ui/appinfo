@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.dao.appdevuserdao">
+  <select id="login" resultType="com.bdqn.mapper.DevUser">
+    select * from dev_user where dev_code=#{devCode,jdbcType=VARCHAR} and dev_password=#{devPassword,jdbcType=VARCHAR}
+  </select>
+  <select id="getAppinfoList" resultType="com.bdqn.mapper.AppInfo">
+    select  a.id,a.software_name,a.apk_name,a.support_rom,a.software_size,a.dev_id,
+      (select  dev_name from dev_user where id=a.dev_id) as devName,
+        a.status,
+      (select value_name from data_dictionary d  where a.status=d.value_id and d.type_code='App_STATUS') as statusName,
+        a.flatform_id,
+      (select  value_name from  data_dictionary d where a.flatform_id=d.value_id AND d.type_code='APP_FLATFORM') as flatformName,
+        a.category_level1,
+      (select category_name from app_category c where c.id=a.category_level1)as categoryLevel1Name,
+        a.category_level2,
+      (select category_name from app_category c where c.id=a.category_level2)as categoryLevel2Name,
+        a.category_level3,
+      (select category_name from app_category c where c.id=a.category_level3)as categoryLevel3Name,
+        a.downloads,
+        a.on_sale_date,
+        a.version_id,
+      (select v.version_no from app_version v where  v.id=a.version_id) as versionNo
+        from app_info a
+  </select>
+</mapper>
