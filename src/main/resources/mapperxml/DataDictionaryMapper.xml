@@ -158,8 +158,23 @@
           </if>
         </where>
   </select>
+  <select id="getappcategorylist4" resultType="com.bdqn.mapper.AppCategory">
+    SELECT  id,category_name
+    FROM app_category
+    <where>
+      <if test="id!=0">
+          parent_id =#{id,jdbcType=BIGINT}
+      </if>
+      <if test="id==0">
+       and parent_id is null
+      </if>
+    </where>
+  </select>
   <select id="categorylevellist" resultType="com.bdqn.mapper.AppCategory">
     select * from app_category where parent_id=#{id}
+  </select>
+  <select id="getappdatadictionlist" resultType="com.bdqn.mapper.DataDictionary">
+    select id,value_name FROM data_dictionary where type_code='APP_FLATFORM'
   </select>
 <!--  <select id="getappcategorylist2" resultType="com.bdqn.mapper.AppCategory">
     SELECT parent_id,category_name from app_category where parent_id=0

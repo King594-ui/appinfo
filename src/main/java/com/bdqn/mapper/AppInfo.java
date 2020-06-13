@@ -113,7 +113,6 @@ public class AppInfo {
     * LOGO图片url路径
     */
     private String logoPicPath;
-
     public String getStatusName() {
         return statusName;
     }

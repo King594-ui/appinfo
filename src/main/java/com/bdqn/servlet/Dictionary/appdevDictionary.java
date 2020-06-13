@@ -17,6 +17,6 @@ public interface appdevDictionary {
     List<DataDictionary> getappcategorylist1();
     //开发一级分类
     List<AppCategory> getappcategorylist2(String level,Long id);
-    //开发二级分类
-//    List<AppCategory> getappcategorylist3();
+    //新增查询二级分类
+    List<AppCategory> getappcategorylist4(Long id);
 }

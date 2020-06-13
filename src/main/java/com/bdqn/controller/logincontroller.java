@@ -35,6 +35,12 @@ public class logincontroller {
         return "devlogin";
     }
 
+    /**
+     * 前台登陆
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "denglulu")
     public String denglulu(HttpServletRequest request, Model model){
         String name=request.getParameter("devCode");

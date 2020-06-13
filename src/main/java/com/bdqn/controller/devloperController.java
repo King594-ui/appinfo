@@ -27,6 +27,13 @@ public class devloperController {
     private appdevUser appdevUser;
     @Resource
     private appDataDictionaryColler appDataDictionaryColler;
+
+    /**
+     * 前台模糊查询
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping("/list1")
     public String lists1(Model model, HttpServletRequest request){
         String querySoftwareName=request.getParameter("querySoftwareName");
@@ -96,4 +103,5 @@ public class devloperController {
         List<AppCategory> lis=appDataDictionaryColler.categorylevellist(Long.parseLong(id));
         return JSONArray.toJSONString(lis);
     }
+
 }

@@ -29,6 +29,13 @@ public class BackendController {
     public String denglu1(){
         return "backendlogin";
     }
+
+    /**
+     * 后台登陆
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "kaifadenglu")
     public String kaifadenglu(HttpServletRequest request, Model model){
         String name=request.getParameter("userCode");

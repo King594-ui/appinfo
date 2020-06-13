@@ -1,7 +1,6 @@
 package com.bdqn.servlet.Dictionary;
 
 import com.bdqn.dao.appDataDictionaryColler;
-import com.bdqn.dao.appdevuserdao;
 import com.bdqn.mapper.AppCategory;
 import com.bdqn.mapper.DataDictionary;
 
@@ -30,6 +29,11 @@ public class appdevDictionaryImpl implements appdevDictionary{
     @Override
     public List<AppCategory> getappcategorylist2(String level,Long id) {
         return appDataDictionaryColler.getappcategorylist2(level,id);
+    }
+
+    @Override
+    public List<AppCategory> getappcategorylist4(Long id) {
+        return appDataDictionaryColler.getappcategorylist4(id);
     }
 
 }
