@@ -2,6 +2,9 @@ package com.bdqn.servlet.Dictionary;
 
 import com.bdqn.mapper.AppCategory;
 import com.bdqn.mapper.DataDictionary;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
+import com.bdqn.mapper.AppInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,4 +22,10 @@ public interface appdevDictionary {
     List<AppCategory> getappcategorylist2(String level,Long id);
     //新增查询二级分类
     List<AppCategory> getappcategorylist4(Long id);
+    //新增方法
+     int getappinfoAdd(AppInfo appInfo);
+    //apk查询是否重复
+    int getapkname(String apkname);
+    //删除方法
+    int delapp( Long id);
 }

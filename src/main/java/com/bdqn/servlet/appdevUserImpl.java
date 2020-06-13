@@ -35,7 +35,13 @@ public class appdevUserImpl implements appdevUser {
                                         Long queryFlatformId,
                                         Long queryCategoryLevel1,
                                         Long queryCategoryLevel2,
-                                        Long queryCategoryLevel3) {
-        return appdevuserdao.getAppinfoList(querySoftwareName,queryStatus,queryFlatformId,queryCategoryLevel1,queryCategoryLevel2,queryCategoryLevel3);
+                                        Long queryCategoryLevel3,int currentPageNo,int pageSize) {
+        return appdevuserdao.getAppinfoList(querySoftwareName,queryStatus,queryFlatformId,queryCategoryLevel1,queryCategoryLevel2,queryCategoryLevel3,currentPageNo,pageSize);
     }
+
+    @Override
+    public int getappinfoquanbu(String querySoftwareName, Long queryStatus, Long queryFlatformId, Long queryCategoryLevel1, Long queryCategoryLevel2, Long queryCategoryLevel3) {
+        return appdevuserdao.getappinfoquanbu(querySoftwareName,queryStatus,queryFlatformId,queryCategoryLevel1,queryCategoryLevel2,queryCategoryLevel3);
+    }
+
 }

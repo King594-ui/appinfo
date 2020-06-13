@@ -1,7 +1,9 @@
 package com.bdqn.dao;
 
 import com.bdqn.mapper.AppCategory;
+import com.bdqn.mapper.AppInfo;
 import com.bdqn.mapper.DataDictionary;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -24,4 +26,10 @@ public interface appDataDictionaryColler {
     List<DataDictionary> getappdatadictionlist(@Param("code") String code);
     //新增三级查询
     List<AppCategory> getappcategorylist4(@Param("id") long id);
+    //新增方法
+    int getappinfoAdd(AppInfo appInfo);
+    //apk查询是否重复
+    int getapkname(@Param("apkname") String apkname);
+    //删除方法
+    int delapp(@Param("id") Long id);
 }

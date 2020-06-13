@@ -6,7 +6,7 @@ package com.bdqn.mapper;
  * @date 2020-06-13 13:57
  */
 public class appinfo1 {
-    private String softwareName;//软件名称
+  /*  private String softwareName;//软件名称
     private String apkName;//APK名称
     private String supportRom;//支持ROM
     private String interfaceLanguage;//界面语言
@@ -142,5 +142,5 @@ public class appinfo1 {
         this.logoPicPath = logoPicPath;
     }
 
-
+*/
 }

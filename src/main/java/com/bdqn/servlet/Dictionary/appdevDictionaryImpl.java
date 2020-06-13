@@ -2,7 +2,9 @@ package com.bdqn.servlet.Dictionary;
 
 import com.bdqn.dao.appDataDictionaryColler;
 import com.bdqn.mapper.AppCategory;
+import com.bdqn.mapper.AppInfo;
 import com.bdqn.mapper.DataDictionary;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -36,4 +38,18 @@ public class appdevDictionaryImpl implements appdevDictionary{
         return appDataDictionaryColler.getappcategorylist4(id);
     }
 
+    @Override
+    public int getappinfoAdd(AppInfo appInfo) {
+        return appDataDictionaryColler.getappinfoAdd(appInfo);
+    }
+
+    @Override
+    public int getapkname(String apkname) {
+        return appDataDictionaryColler.getapkname(apkname);
+    }
+
+    @Override
+    public int delapp(Long id) {
+        return appDataDictionaryColler.delapp(id);
+    }
 }

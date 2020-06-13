@@ -6,6 +6,7 @@ import com.bdqn.mapper.AppCategory;
 import com.bdqn.mapper.AppInfo;
 import com.bdqn.mapper.DataDictionary;
 import com.bdqn.servlet.appdevUser;
+import com.bdqn.tools.PageSupport;
 import com.mysql.cj.util.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,7 @@ public class devloperController {
     @RequestMapping("/list1")
     public String lists1(Model model, HttpServletRequest request){
         String querySoftwareName=request.getParameter("querySoftwareName");
+        String pageIndex=request.getParameter("pageIndex");
         System.out.println(querySoftwareName);
 
         String queryStatus1=request.getParameter("queryStatus");
@@ -68,8 +70,6 @@ public class devloperController {
             queryCategoryLevel2=Long.parseLong(categorylevel2);
             categoryLevel2List=appDataDictionaryColler.getappcategorylist2("",queryCategoryLevel2);
         }
-
-
         List<AppCategory> categoryLevel3List=null;
         String categorylevel3=request.getParameter("queryCategoryLevel3");
         Long queryCategoryLevel3=null;
@@ -77,9 +77,25 @@ public class devloperController {
             queryCategoryLevel3=Long.parseLong(categorylevel3);
             categoryLevel3List=appDataDictionaryColler.getappcategorylist2("",queryCategoryLevel3);
         }
-
+        int pageSize =5;//设置页面容量
+        int currentPageNo = 1; //当前页码
+        if (pageIndex!=null && !pageIndex.equals("")){
+            currentPageNo=Integer.parseInt(pageIndex);
+        }
+        int totalCount	= appdevUser.getappinfoquanbu(querySoftwareName,queryStatus,queryFlatformId,queryCategoryLevel1,queryCategoryLevel2,queryCategoryLevel3);
+        PageSupport pages=new PageSupport();
+        pages.setCurrentPageNo(currentPageNo);
+        pages.setPageSize(pageSize);
+        pages.setTotalCount(totalCount);
+        int totalPageCount = pages.getTotalPageCount();
+        //控制首页和尾页
+        if(currentPageNo < 1){
+            currentPageNo = 1;
+        }else if(currentPageNo > totalPageCount){
+            currentPageNo = totalPageCount;
+        }
         List<AppInfo> appInfoList= appdevUser.getAppinfoList(querySoftwareName,queryStatus,queryFlatformId,
-                queryCategoryLevel1,queryCategoryLevel2,queryCategoryLevel3);
+                queryCategoryLevel1,queryCategoryLevel2,queryCategoryLevel3,((currentPageNo-1)*pageSize),pageSize);
 
         model.addAttribute("appInfoList",appInfoList);
         model.addAttribute("statusList",statusList);
@@ -87,6 +103,7 @@ public class devloperController {
         model.addAttribute("categoryLevel1List",categoryLevel1List);
         model.addAttribute("categoryLevel2List",categoryLevel2List);
         model.addAttribute("categoryLevel3List",categoryLevel3List);
+        model.addAttribute("pages",pages);
         //回显
         model.addAttribute("querySoftwareName",querySoftwareName);
         model.addAttribute("queryStatus",queryStatus);
@@ -96,6 +113,13 @@ public class devloperController {
         model.addAttribute("queryCategoryLevel3",queryCategoryLevel3);
         return "developer/appinfolist";
     }
+
+    /***
+     * 动态加载返回json
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping("categorylevellist")
     @ResponseBody
     public Object score(HttpServletRequest request,Model model){

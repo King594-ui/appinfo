@@ -67,8 +67,7 @@ public class AppInfo {
     /**
     * 所属平台（来源于：data_dictionary，1 手机 2 平板 3 通用）
     */
-    private Long flatformId;
-
+    private String flatformId;
     /**
     * 所属三级分类（来源于：data_dictionary）
     */
@@ -113,6 +112,9 @@ public class AppInfo {
     * LOGO图片url路径
     */
     private String logoPicPath;
+    private String statusName;
+    private String versionNo;
+
     public String getStatusName() {
         return statusName;
     }
@@ -121,8 +123,6 @@ public class AppInfo {
         this.statusName = statusName;
     }
 
-    private String statusName;
-    private String versionNo;
 
     public String getVersionNo() {
         return versionNo;
@@ -247,11 +247,11 @@ public class AppInfo {
         this.offSaleDate = offSaleDate;
     }
 
-    public Long getFlatformId() {
+    public String getFlatformId() {
         return flatformId;
     }
 
-    public void setFlatformId(Long flatformId) {
+    public void setFlatformId(String flatformId) {
         this.flatformId = flatformId;
     }
 

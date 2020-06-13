@@ -21,5 +21,13 @@ public interface appdevUser {
                                  Long queryFlatformId,
                                  Long queryCategoryLevel1,
                                  Long queryCategoryLevel2,
-                                  Long queryCategoryLevel3);
+                                  Long queryCategoryLevel3,
+                                int currentPageNo,
+                                 int pageSize);
+    int getappinfoquanbu(@Param("querySoftwareName") String querySoftwareName,
+                                   @Param("queryStatus") Long queryStatus,
+                                   @Param("queryFlatformId") Long queryFlatformId,
+                                   @Param("queryCategoryLevel1") Long queryCategoryLevel1,
+                                   @Param("queryCategoryLevel2") Long queryCategoryLevel2,
+                                   @Param("queryCategoryLevel3") Long queryCategoryLevel3);
 }

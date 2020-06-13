@@ -25,6 +25,14 @@ public interface appdevuserdao {
                                  @Param("queryFlatformId") Long queryFlatformId,
                                  @Param("queryCategoryLevel1") Long queryCategoryLevel1,
                                  @Param("queryCategoryLevel2") Long queryCategoryLevel2,
-                                 @Param("queryCategoryLevel3") Long queryCategoryLevel3);
+                                 @Param("queryCategoryLevel3") Long queryCategoryLevel3,
+                                 @Param("currentPageNo") int currentPageNo,
+                                 @Param("pageSize")int pageSize);
 
+    int getappinfoquanbu(@Param("querySoftwareName") String querySoftwareName,
+                                   @Param("queryStatus") Long queryStatus,
+                                   @Param("queryFlatformId") Long queryFlatformId,
+                                   @Param("queryCategoryLevel1") Long queryCategoryLevel1,
+                                   @Param("queryCategoryLevel2") Long queryCategoryLevel2,
+                                   @Param("queryCategoryLevel3") Long queryCategoryLevel3);
 }
