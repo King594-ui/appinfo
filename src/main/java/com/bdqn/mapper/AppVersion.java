@@ -4,10 +4,27 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class AppVersion {
+    public String getPublishStatusName() {
+        return publishStatusName;
+    }
+
+    public void setPublishStatusName(String publishStatusName) {
+        this.publishStatusName = publishStatusName;
+    }
+
     /**
     * 主键id
     */
     private Long id;
+    private String appName;
+        private String publishStatusName;
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
 
     /**
     * appId（来源于：app_info表的主键id）

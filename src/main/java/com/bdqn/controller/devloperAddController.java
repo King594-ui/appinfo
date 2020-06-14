@@ -3,17 +3,16 @@ package com.bdqn.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.bdqn.dao.appDataDictionaryColler;
 import com.bdqn.mapper.*;
+import com.bdqn.servlet.Dictionary.appdevDictionary;
 import com.mysql.cj.util.StringUtils;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -156,6 +155,20 @@ public class devloperAddController {
         return JSONArray.toJSONString(resultMap);
     }
 
+    /***
+     *信息查看
+     * @return
+     */
+    @RequestMapping(value = "/appviewss/{id}",method = RequestMethod.GET)
+    public String appchaxun(@PathVariable Long id,Model model){
+        List<AppVersion> appVersionList = null;
+        AppInfo appInfo= appDataDictionaryColler.appdevloperchaxun(id);
+        appVersionList=appDataDictionaryColler.getAppVersionList(id);
+        System.out.println(appInfo);
+        model.addAttribute("appInfo",appInfo);
+       model.addAttribute("appVersionList",appVersionList);
+        return "developer/appinfoview";
+    }
     /***
      * 删除操作
      * @param request

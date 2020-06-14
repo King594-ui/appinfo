@@ -2,6 +2,7 @@ package com.bdqn.dao;
 
 import com.bdqn.mapper.AppCategory;
 import com.bdqn.mapper.AppInfo;
+import com.bdqn.mapper.AppVersion;
 import com.bdqn.mapper.DataDictionary;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import org.apache.ibatis.annotations.Param;
@@ -32,4 +33,8 @@ public interface appDataDictionaryColler {
     int getapkname(@Param("apkname") String apkname);
     //删除方法
     int delapp(@Param("id") Long id);
+    //查看方法
+    AppInfo appdevloperchaxun(@Param("id") Long id);
+    //查看版本方法
+    List<AppVersion> getAppVersionList(@Param("appId") Long appId);
 }

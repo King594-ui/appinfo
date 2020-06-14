@@ -1,5 +1,6 @@
 $("#back").on("click",function(){
-	window.location.href = "../list";
+	alert("dsads")
+	window.location.href = "/list1";
 });
 	
 	

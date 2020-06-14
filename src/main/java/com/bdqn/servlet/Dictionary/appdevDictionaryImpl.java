@@ -3,6 +3,7 @@ package com.bdqn.servlet.Dictionary;
 import com.bdqn.dao.appDataDictionaryColler;
 import com.bdqn.mapper.AppCategory;
 import com.bdqn.mapper.AppInfo;
+import com.bdqn.mapper.AppVersion;
 import com.bdqn.mapper.DataDictionary;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 
@@ -51,5 +52,15 @@ public class appdevDictionaryImpl implements appdevDictionary{
     @Override
     public int delapp(Long id) {
         return appDataDictionaryColler.delapp(id);
+    }
+
+    @Override
+    public AppInfo appdevloperchaxun(Long id) {
+        return appDataDictionaryColler.appdevloperchaxun(id);
+    }
+
+    @Override
+    public List<AppVersion> getAppVersionList(Long appId) {
+        return appDataDictionaryColler.getAppVersionList(appId);
     }
 }

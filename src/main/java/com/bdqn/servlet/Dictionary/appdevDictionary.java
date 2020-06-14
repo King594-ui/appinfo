@@ -1,6 +1,7 @@
 package com.bdqn.servlet.Dictionary;
 
 import com.bdqn.mapper.AppCategory;
+import com.bdqn.mapper.AppVersion;
 import com.bdqn.mapper.DataDictionary;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import com.bdqn.mapper.AppInfo;
@@ -28,4 +29,8 @@ public interface appdevDictionary {
     int getapkname(String apkname);
     //删除方法
     int delapp( Long id);
+    //查看方法
+    AppInfo appdevloperchaxun(Long id);
+    //查看版本方法
+    List<AppVersion> getAppVersionList(Long appId);
 }
