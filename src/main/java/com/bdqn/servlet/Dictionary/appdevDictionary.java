@@ -33,4 +33,9 @@ public interface appdevDictionary {
     AppInfo appdevloperchaxun(Long id);
     //查看版本方法
     List<AppVersion> getAppVersionList(Long appId);
+    // //修改方法
+    int  updateByPrimaryKeySelective(AppInfo appInfo);
+    //查看版本方法
+    AppVersion getappVersionUpdate( long id, Long aid);
+
 }

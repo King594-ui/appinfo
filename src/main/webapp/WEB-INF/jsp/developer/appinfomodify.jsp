@@ -10,7 +10,7 @@
              <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <form class="form-horizontal form-label-left" action="appinfomodifysave" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal form-label-left" action="/appinfomodifysave" method="post" enctype="multipart/form-data">
           <input type="hidden" name="id" id="id" value="${appInfo.id}">
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">软件名称 <span class="required">*</span>
@@ -27,7 +27,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input id="APKName" type="text" class="form-control col-md-7 col-xs-12" 
-              name="APKName" value="${appInfo.APKName}" readonly="readonly">
+              name="APKName" value="${appInfo.apkName}" readonly="readonly">
             </div>
           </div>
           
@@ -36,7 +36,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input id="supportROM" class="form-control col-md-7 col-xs-12" 
-              	name="supportROM" value="${appInfo.supportROM}" required="required"
+              	name="supportROM" value="${appInfo.supportRom}" required="required"
               	data-validate-length-range="20" data-validate-words="1" 
               	placeholder="请输入支持的ROM" type="text">
             </div>

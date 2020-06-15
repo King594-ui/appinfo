@@ -161,7 +161,7 @@
 										aria-controls="datatable-responsive" rowspan="1" colspan="1"
 										style="width: 124px;"
 										aria-label="Last name: activate to sort column ascending">
-										操作</th>
+										操作</th>0
 								</tr>
 							</thead>
 							<tbody>
@@ -171,11 +171,11 @@
 										<td>${appInfo.apkName }</td>
 										<td>${appInfo.softwareName }</td>
 										<td>${appInfo.flatformName }</td>
-										<td>${appInfo.categoryLevel1 } -> ${appInfo.categoryLevel2 } -> ${appInfo.categoryLevel3 }</td>
+										<td>${appInfo.categoryLevel1Name } -> ${appInfo.categoryLevel2Name } -> ${appInfo.categoryLevel3Name }</td>
 										<td><span id="appInfoStatus${appInfo.id}">${appInfo.statusName }</span></td>
 										<td>${appInfo.downloads }</td>
 										<td>${appInfo.versionNo }</td>
-										<td>
+										<td>2
 										
 										
 										<div class="btn-group">

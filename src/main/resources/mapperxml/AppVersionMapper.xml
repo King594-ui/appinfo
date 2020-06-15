@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mapper.AppVersionMapper">
-  <resultMap id="BaseResultMap" type="com.bdqn.mapper.AppVersion">
-    <!--@mbg.generated-->
-    <!--@Table app_version-->
+<mapper namespace="com.bdqn.dao.appDataDictionaryColler">
+ <!-- <resultMap id="BaseResultMap" type="com.bdqn.mapper.AppVersion">
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
+    &lt;!&ndash;@Table app_version&ndash;&gt;
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="app_id" jdbcType="BIGINT" property="appId" />
     <result column="version_no" jdbcType="VARCHAR" property="versionNo" />
@@ -17,26 +17,25 @@
     <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
     <result column="apk_loc_path" jdbcType="VARCHAR" property="apkLocPath" />
     <result column="apk_file_name" jdbcType="VARCHAR" property="apkFileName" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
+  </resultMap>-->
+<!--  <sql id="Base_Column_List">
     id, app_id, version_no, version_ifno, publish_status, download_link, version_size, 
     created_by, creation_date, modify_by, modify_date, apk_loc_path, apk_file_name
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
+  </sql>-->
+  <select id="getappVersionUpdate" resultType="com.bdqn.mapper.AppVersion">
+
+    select id, app_id, version_no, version_ifno, publish_status, download_link, version_size,
+    created_by, creation_date, modify_by, modify_date, apk_loc_path, apk_file_name
     from app_version
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
     delete from app_version
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bdqn.mapper.AppVersion" useGeneratedKeys="true">
-    <!--@mbg.generated-->
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
     insert into app_version (app_id, version_no, version_ifno, 
       publish_status, download_link, version_size, 
       created_by, creation_date, modify_by, 
@@ -49,7 +48,7 @@
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bdqn.mapper.AppVersion" useGeneratedKeys="true">
-    <!--@mbg.generated-->
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
     insert into app_version
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="appId != null">
@@ -128,8 +127,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bdqn.mapper.AppVersion">
-    <!--@mbg.generated-->
+  <update id="updateByPrimaryKeySelectives" parameterType="com.bdqn.mapper.AppVersion">
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
     update app_version
     <set>
       <if test="appId != null">
@@ -172,7 +171,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bdqn.mapper.AppVersion">
-    <!--@mbg.generated-->
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
     update app_version
     set app_id = #{appId,jdbcType=BIGINT},
       version_no = #{versionNo,jdbcType=VARCHAR},
@@ -187,5 +186,5 @@
       apk_loc_path = #{apkLocPath,jdbcType=VARCHAR},
       apk_file_name = #{apkFileName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
-  </update>
+  </update>-->
 </mapper>

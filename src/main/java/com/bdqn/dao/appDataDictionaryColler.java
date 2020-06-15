@@ -6,6 +6,7 @@ import com.bdqn.mapper.AppVersion;
 import com.bdqn.mapper.DataDictionary;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -37,4 +38,8 @@ public interface appDataDictionaryColler {
     AppInfo appdevloperchaxun(@Param("id") Long id);
     //查看版本方法
     List<AppVersion> getAppVersionList(@Param("appId") Long appId);
+    //修改方法
+    int updateByPrimaryKeySelective(AppInfo appInfo);
+    //查看版本方法
+    AppVersion getappVersionUpdate(@Param("id") long id,@Param("aid") Long aid);
 }
