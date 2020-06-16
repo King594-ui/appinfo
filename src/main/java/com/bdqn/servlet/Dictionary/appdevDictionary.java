@@ -36,6 +36,13 @@ public interface appdevDictionary {
     // //修改方法
     int  updateByPrimaryKeySelective(AppInfo appInfo);
     //查看版本方法
-    AppVersion getappVersionUpdate( long id, Long aid);
-
+    AppVersion getappVersionUpdate( Long aid,Long vid);
+    //查看旧版本方法
+    List<AppVersion> getappVersionUpdate1(Long aid, Long vid);
+    //删除apk文件
+    int deleteapk(Long id);
+    //新增版本方法
+    int insertversion(AppVersion appVersion);
+    //新增版本方法1
+    int selectappversion();
 }

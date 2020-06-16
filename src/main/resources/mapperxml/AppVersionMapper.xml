@@ -23,12 +23,68 @@
     created_by, creation_date, modify_by, modify_date, apk_loc_path, apk_file_name
   </sql>-->
   <select id="getappVersionUpdate" resultType="com.bdqn.mapper.AppVersion">
-
-    select id, app_id, version_no, version_ifno, publish_status, download_link, version_size,
-    created_by, creation_date, modify_by, modify_date, apk_loc_path, apk_file_name
-    from app_version
-    where id = #{id,jdbcType=BIGINT}
+      select  v.version_ifno,v.apk_file_name,v.id,v.app_id,v.version_no,v.version_size,v.download_link,
+      v.modify_date,a.software_name,a.apk_name,`luqiao`.value_name as publishStatusName,
+      (select a.software_name from app_info a where a.id=v.app_id ) as appName
+      from app_version v
+      LEFT JOIN app_info a  on  a.version_id=v.id
+      LEFT JOIN (select value_id,value_name from data_dictionary  d where type_code='PUBLISH_STATUS') luqiao
+      on v.publish_status=luqiao.value_id
+      <where>
+          <if test="vid != null">
+              a.version_id=#{vid,jdbcType=INTEGER}
+          </if>
+          <if test="aid != null ">
+              and a.id=#{aid,jdbcType=INTEGER}
+          </if>
+      </where>
   </select>
+    <select id="getappVersionUpdate1" resultType="com.bdqn.mapper.AppVersion">
+        select  v.version_ifno,v.apk_file_name,v.id,v.app_id,v.version_no,v.version_size,v.download_link,
+        v.modify_date,a.software_name,a.apk_name,`luqiao`.value_name as publishStatusName,
+        (select a.software_name from app_info a where a.id=v.app_id ) as appName
+        from app_version v
+        LEFT JOIN app_info a  on  a.version_id=v.id
+        LEFT JOIN (select value_id,value_name from data_dictionary  d where type_code='PUBLISH_STATUS') luqiao
+        on v.publish_status=luqiao.value_id
+        <where>
+            <if test="vid != null">
+                a.version_id=#{vid,jdbcType=INTEGER}
+            </if>
+            <if test="aid != null ">
+                and a.id=#{aid,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+    <update id="updateappversion">
+        update app_version
+        set app_id = #{appId,jdbcType=BIGINT},
+        version_no = #{versionNo,jdbcType=VARCHAR},
+        version_ifno = #{versionIfno,jdbcType=VARCHAR},
+        publish_status = #{publishStatus,jdbcType=BIGINT},
+        download_link = #{downloadLink,jdbcType=VARCHAR},
+        version_size = #{versionSize,jdbcType=DECIMAL},
+        created_by = #{createdBy,jdbcType=BIGINT},
+        creation_date = #{creationDate,jdbcType=TIMESTAMP},
+        modify_by = #{modifyBy,jdbcType=BIGINT},
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+        apk_loc_path = #{apkLocPath,jdbcType=VARCHAR},
+        apk_file_name = #{apkFileName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <delete id="deleteapk">
+        delete from app_version
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insertversion">
+        insert into app_version (app_id,version_no,version_ifno,publish_status,
+        download_link,version_size,apk_loc_path,apk_file_name,created_by,creation_date)
+        values(#{appId},#{versionNo},#{versionIfno},#{publishStatus},#{downloadLink},
+        #{versionSize},#{apkLocPath},#{apkFileName},#{createdBy},#{creationDate})
+    </insert>
+    <select id="selectappversion" resultType="com.bdqn.mapper.AppVersion">
+        select MAX(id) from app_version
+    </select>
 <!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     &lt;!&ndash;@mbg.generated&ndash;&gt;
     delete from app_version

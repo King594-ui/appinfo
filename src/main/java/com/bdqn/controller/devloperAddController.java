@@ -36,6 +36,25 @@ public class devloperAddController {
     private com.bdqn.dao.appDataDictionaryColler appDataDictionaryColler;
 
     /**
+     * 删除apk文件
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("/delfile.json")
+    @ResponseBody
+    public String deleteapk(HttpServletRequest request,Model model){
+        String id=request.getParameter("id");
+            int count=appDataDictionaryColler.deleteapk(Long.parseLong(id));
+            HashMap<String, String> resultMap = new HashMap<String, String>();
+            if(count>0){
+                resultMap.put("result","success");
+            }else{
+                resultMap.put("result","failed");
+            }
+            return JSONArray.toJSONString(resultMap);
+    }
+    /**
      * 跳转新增方法
      * @return
      */
@@ -113,7 +132,7 @@ public class devloperAddController {
         String logoPicPath =  null;
         String logoLocPath =  null;
         if(attach!=null){
-            String path=request.getSession().getServletContext().getRealPath("images"+ File.separator+"uploadfiles");
+            String path=request.getSession().getServletContext().getRealPath("statics"+ File.separator+"uploadfiles");
             System.out.println("uploadFile path=========>"+path);
             String oldFileName=attach.getOriginalFilename();
             System.out.println("源文件名  oldFileName========>"+oldFileName);
@@ -149,14 +168,12 @@ public class devloperAddController {
                 return "developer/appinfoadd";
             }
         }
-        String flatformId=request.getParameter("flatformId");
-        System.out.println(flatformId);
         appInfo.setCreatedBy(((DevUser)session.getAttribute("devUserSession")).getId());
         appInfo.setCreationDate(new Date());
         appInfo.setLogoPicPath(logoPicPath);
         appInfo.setLogoLocPath(logoLocPath);
         appInfo.setDevId(((DevUser)session.getAttribute("devUserSession")).getId());
-        appInfo.setStatus(9L);
+        appInfo.setStatus(2L);
         int count=appDataDictionaryColler.getappinfoAdd(appInfo);
         if(count>0){
             return "redirect:/list1";
@@ -196,7 +213,7 @@ public class devloperAddController {
     public String appchaxun(@PathVariable Long id,Model model){
         List<AppVersion> appVersionList = null;
         AppInfo appInfo= appDataDictionaryColler.appdevloperchaxun(id);
-        appVersionList=appDataDictionaryColler.getAppVersionList(id);
+        appVersionList=appDataDictionaryColler.getappVersionUpdate1(id,null);
         System.out.println(appInfo);
         model.addAttribute("appInfo",appInfo);
        model.addAttribute("appVersionList",appVersionList);
@@ -253,11 +270,11 @@ public class devloperAddController {
      * @return
      */
     @RequestMapping("/appinfomodifysave")
-    public String appinfoupdate(AppInfo appInfo,HttpServletRequest request,Model model,MultipartFile multipartFile,HttpSession session){
+    public String appinfoupdate(AppInfo appInfo,HttpServletRequest request,Model model,@RequestParam(value = "attach",required = false) MultipartFile multipartFile,HttpSession session){
         String logoPicPath =  null;
         String logoLocPath =  null;
         if(multipartFile!=null){
-            String path=request.getSession().getServletContext().getRealPath("images"+ File.separator+"uploadfiles");
+            String path=request.getSession().getServletContext().getRealPath("statics"+ File.separator+"uploadfiles");
             System.out.println("uploadFile path=========>"+path);
             String oldFileName=multipartFile.getOriginalFilename();
             System.out.println("源文件名  oldFileName========>"+oldFileName);
@@ -308,16 +325,190 @@ public class devloperAddController {
     /**
      * 查看版本方法
      * @param request
-     * @param id
-     * @param aid
      * @param model
      * @return
      */
-    @RequestMapping("/appversionmodify/{id}/{aid}")
-    public String appversionmodify(HttpServletRequest request,@PathVariable Long id,@PathVariable Long aid,Model model){
-        AppVersion appVersion=appDataDictionaryColler.getappVersionUpdate(id,aid);
+    @RequestMapping("/appversionmodify")
+    public String appversionmodify(HttpServletRequest request,Model model){
+        String vids=request.getParameter("vid");
+        String aids=request.getParameter("aid");
+        Long vid=null;
+        if(!StringUtils.isNullOrEmpty(vids)){
+            vid=Long.parseLong(vids);
+        }
+        Long aid=null;
+        if(!StringUtils.isNullOrEmpty(aids)){
+            aid=Long.parseLong(aids);
+        }
+        List<AppVersion> appVersionList=appDataDictionaryColler.getappVersionUpdate1(aid,null);
+        AppVersion appVersion=appDataDictionaryColler.getappVersionUpdate(aid,vid);
         System.out.println(appVersion);
+        System.out.println(appVersionList);
+        model.addAttribute("appVersionList",appVersionList);
         model.addAttribute("appVersion",appVersion);
         return "developer/appversionmodify";
     }
+
+    /***
+     * 修改版本方法
+     * @param request
+     * @param model
+     * @param appVersion
+     * @return
+     */
+    @RequestMapping("/appversionmodifysave")
+    public String appversionmodifysave(HttpServletRequest request,Model model,HttpSession session,AppVersion appVersion,@RequestParam(value = "attach",required = false) MultipartFile multipartFile){
+        String apk_loc_path=null;
+
+        if(multipartFile!=null){
+            String path=request.getSession().getServletContext().getRealPath("statics"+ File.separator+"uploadfiles");
+            System.out.println("uploadFile path=========>"+path);
+            String oldFileName=multipartFile.getOriginalFilename();
+            System.out.println("源文件名  oldFileName========>"+oldFileName);
+            String prefix= FilenameUtils.getExtension(oldFileName);
+            System.out.println("源文件后缀 prefix========>"+prefix);
+            int filesize=500000;
+            System.out.println("uploadFile size==========>"+multipartFile.getSize());
+            if (multipartFile.getSize()>filesize){
+                request.setAttribute("uploadFileError","* 上传文件不得超过500KB");
+                return "developer/appinfoadd";
+            }else if(prefix.equalsIgnoreCase("apk")){
+                String fileName=System.currentTimeMillis()+Math.abs(new Random().nextLong())+"_Personal.apk";
+                System.out.println(fileName);
+                System.out.println("new fileName==========>"+multipartFile.getName());
+                File targetFile=new File(path,fileName);
+                if (!targetFile.exists()){
+                    targetFile.mkdirs();
+                }
+                try {
+                    multipartFile.transferTo(targetFile);
+                }catch(Exception e){
+                    e.printStackTrace();
+                    request.setAttribute("uploadFileError","* 上传失败");
+                    return "developer/appinfoadd";
+                }
+                apk_loc_path = request.getContextPath()+"/statics/uploadfiles/"+fileName;
+
+            }/*else{
+                request.setAttribute("uploadFileError","上传图片格式不正确");
+                return "developer/appinfoadd";
+            }*/
+        }
+        appVersion.setCreatedBy(((DevUser)session.getAttribute("devUserSession")).getId());
+        appVersion.setCreationDate(new Date());
+        appVersion.setAppId(((DevUser)session.getAttribute("devUserSession")).getId());
+        appVersion.setApkLocPath(apk_loc_path);
+        int count=appDataDictionaryColler.updateappversion(appVersion);
+        if(count>0){
+            return "redirect:/list1";
+        }else{
+            return "developer/appversionmodify";
+        }
+    }
+
+    /***
+     * 单击新增跳转新增路劲
+     * @return
+     */
+    @RequestMapping("/appversionadd")
+    public String appversionadd(){
+
+        return "developer/appversionadd";
+    }
+
+    /**
+     * 单击保存按钮实现新增版本
+     * @param appVersion
+     * @param request
+     * @param model
+     * @param multipartFile
+     * @return
+     */
+    @RequestMapping("addversionsave")
+    public String addversionsave(AppVersion appVersion,HttpSession session,HttpServletRequest request,Model model,@RequestParam(value = "a_downloadLink",required = false) MultipartFile multipartFile){
+        String apkLocPath=null;
+        String downloadLink=null;
+        if(multipartFile!=null){
+            String path=request.getSession().getServletContext().getRealPath("statics"+ File.separator+"uploadfiles");
+            System.out.println("uploadFile path=========>"+path);
+            String oldFileName=multipartFile.getOriginalFilename();
+            System.out.println("源文件名  oldFileName========>"+oldFileName);
+            String prefix= FilenameUtils.getExtension(oldFileName);
+            System.out.println("源文件后缀 prefix========>"+prefix);
+            int filesize=500000;
+            System.out.println("uploadFile size==========>"+multipartFile.getSize());
+            /*if (multipartFile.getSize()>filesize){
+                request.setAttribute("uploadFileError","* 上传文件不得超过500KB");
+                return "developer/appversionadd";
+            }else*/ if(prefix.equalsIgnoreCase("apk")){
+                String fileName=System.currentTimeMillis()+Math.abs(new Random().nextLong())+"_Personal.apk";
+                System.out.println(fileName);
+                System.out.println("new fileName==========>"+multipartFile.getName());
+                File targetFile=new File(path,fileName);
+                if (!targetFile.exists()){
+                    targetFile.mkdirs();
+                }
+                try {
+                    multipartFile.transferTo(targetFile);
+                }catch(Exception e){
+                    e.printStackTrace();
+                    request.setAttribute("uploadFileError","* 上传失败");
+                    return "developer/appversionadd";
+                }
+                apkLocPath = request.getContextPath()+"/statics/uploadfiles/"+fileName;
+                downloadLink = path+File.separator+fileName;
+            }else{
+                request.setAttribute("uploadFileError","上传apk格式不正确");
+                return "developer/appversionadd";
+            }
+        }
+        appVersion.setAppId(((DevUser)session.getAttribute("devUserSession")).getId());
+        appVersion.setModifyBy(((DevUser)session.getAttribute("devUserSession")).getId());
+        appVersion.setCreationDate(new Date());
+        appVersion.setApkLocPath(apkLocPath);
+        appVersion.setDownloadLink(downloadLink);
+        int count=appDataDictionaryColler.insertversion(appVersion);
+        if(count>0){
+            int sum=appDataDictionaryColler.selectappversion();
+            return "redirect:/list1";
+        }else{
+            return "developer/appversionadd";
+        }
+    }
+
+
+   /* @RequestMapping(value="/{appid}/sale",method=RequestMethod.PUT)
+    @ResponseBody
+    public Object sale(@PathVariable String appid,HttpSession session){
+        HashMap<String, Object> resultMap = new HashMap<String, Object>();
+        Long appIdInteger = null;
+            appIdInteger = Long.parseLong(appid);
+        resultMap.put("errorCode", "0");
+        resultMap.put("appId", appid);
+        if(appIdInteger>0){
+            try {
+                DevUser devUser = (DevUser)session.getAttribute("devUserSession");
+                AppInfo appInfo = new AppInfo();
+                appInfo.setId(appIdInteger);
+                appInfo.setModifyBy(devUser.getId());
+                if(appDataDictionaryColler.appsysUpdateSaleStatusByAppId(appInfo)){
+                    resultMap.put("resultMsg", "success");
+                }else{
+                    resultMap.put("resultMsg", "success");
+                }
+            } catch (Exception e) {
+                resultMap.put("errorCode", "exception000001");
+            }
+        }else{
+            resultMap.put("errorCode", "param000001");
+        }
+        return resultMap;
+    }*/
+    /*@RequestMapping("/appversionmodify/{vid}/{aid}")
+    public String appversionmodify(HttpServletRequest request,@PathVariable Long vid,@PathVariable Long aid,Model model){
+        AppVersion appVersion=appDataDictionaryColler.getappVersionUpdate(vid);
+        System.out.println(appVersion);
+        model.addAttribute("appVersion",appVersion);
+        return "developer/appversionmodify";
+    }*/
 }

@@ -105,6 +105,7 @@ public class AppInfo {
      * /app所属平台名称
      */
     private String flatformName;
+
     private String categoryLevel3Name;//所属三级分类名称
     private String devName;//开发者名称
 

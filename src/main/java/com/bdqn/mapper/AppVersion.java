@@ -16,15 +16,6 @@ public class AppVersion {
     * 主键id
     */
     private Long id;
-    private String appName;
-        private String publishStatusName;
-    public String getAppName() {
-        return appName;
-    }
-
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
 
     /**
     * appId（来源于：app_info表的主键id）
@@ -85,6 +76,17 @@ public class AppVersion {
     * 上传的apk文件名称
     */
     private String apkFileName;
+    private String appName;
+
+    private String publishStatusName;
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
 
     public Long getId() {
         return id;

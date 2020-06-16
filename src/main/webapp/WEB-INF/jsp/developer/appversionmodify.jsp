@@ -91,7 +91,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">版本号 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input class="form-control col-md-7 col-xs-12" value="${appVersion.versionNo }" 
+              <input class="form-control col-md-7 col-xs-12" value="${appVersion.versionNo }"
               type="text" readonly="readonly" id="versionNo" name="versionNo">
             </div>
           </div>
@@ -115,9 +115,9 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">版本简介 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <textarea id="versionInfo" name="versionInfo" required="required"  
+              <textarea id="versionInfo" name="versionIfno" required="required"
               placeholder="请输入本版本的相关信息，本信息作为该版本的详细信息进行版本介绍。" class="form-control col-md-7 col-xs-12">
-              ${appVersion.versionInfo }</textarea>
+              ${appVersion.versionIfno }</textarea>
             </div>
           </div>
            <div class="item form-group">
@@ -132,7 +132,7 @@
 				<p><span style="color:red;font-weight: bold;">*注：1、大小不得超过500m.2、文件类型：apk</span></p>
 			</div>
 			<div id="apkFile"></div>
-			${fileUploadError }
+			${ fileUploadError}
             </div>
           </div>
           <div class="ln_solid"></div>

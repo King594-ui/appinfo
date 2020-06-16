@@ -41,5 +41,15 @@ public interface appDataDictionaryColler {
     //修改方法
     int updateByPrimaryKeySelective(AppInfo appInfo);
     //查看版本方法
-    AppVersion getappVersionUpdate(@Param("id") long id,@Param("aid") Long aid);
+    AppVersion getappVersionUpdate(@Param("aid") Long aid,@Param("vid") Long vid);
+    //查看旧版本方法
+    List<AppVersion>  getappVersionUpdate1(@Param("aid") Long aid,@Param("vid") Long vid);
+    //版本修改方法
+    int updateappversion(AppVersion appVersion);
+    //删除apk文件
+    int deleteapk(@Param("id") Long id);
+    //新增版本方法
+    int insertversion(AppVersion appVersion);
+    //新增版本方法1
+    int selectappversion();
 }

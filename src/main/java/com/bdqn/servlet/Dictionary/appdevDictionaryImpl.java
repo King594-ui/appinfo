@@ -67,10 +67,31 @@ public class appdevDictionaryImpl implements appdevDictionary{
     @Override
     public int updateByPrimaryKeySelective(AppInfo appInfo) {
         return appDataDictionaryColler.updateByPrimaryKeySelective(appInfo);
+
     }
 
     @Override
-    public AppVersion getappVersionUpdate(long id, Long aid) {
-        return appDataDictionaryColler.getappVersionUpdate(id,aid);
+    public AppVersion getappVersionUpdate(Long aid ,Long vid) {
+        return appDataDictionaryColler.getappVersionUpdate(aid,vid);
+    }
+
+    @Override
+    public List<AppVersion> getappVersionUpdate1(Long aid,Long vid) {
+        return appDataDictionaryColler.getappVersionUpdate1(aid,vid);
+    }
+
+    @Override
+    public int deleteapk(Long id) {
+        return appDataDictionaryColler.deleteapk(id);
+    }
+
+    @Override
+    public int insertversion(AppVersion appVersion) {
+        return appDataDictionaryColler.insertversion(appVersion);
+    }
+
+    @Override
+    public int selectappversion() {
+        return appDataDictionaryColler.selectappversion();
     }
 }
