@@ -14,7 +14,7 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="x_content">
-				<form method="post" action="list">
+				<form method="post" action="/qiao">
 					<input type="hidden" name="pageIndex" value="1" />
 			    <ul>
 					<li>
@@ -159,7 +159,7 @@
 								<c:forEach var="appInfo" items="${appInfoList }" varStatus="status">
 									<tr role="row" class="odd">
 										<td tabindex="0" class="sorting_1">${appInfo.softwareName}</td>
-										<td>${appInfo.APKName }</td>
+										<td>${appInfo.apkName }</td>
 										<td>${appInfo.softwareSize }</td>
 										<td>${appInfo.flatformName }</td>
 										<td>${appInfo.categoryLevel1Name } -> ${appInfo.categoryLevel2Name } -> ${appInfo.categoryLevel3Name }</td>
@@ -181,7 +181,7 @@
 				<div class="row">
 					<div class="col-sm-5">
 						<div class="dataTables_info" id="datatable-responsive_info"
-							role="status" aria-live="polite">共${pages.totalCount }条记录sss
+							role="status" aria-live="polite">共${pages.totalCount }条记录
 							${pages.currentPageNo }/${pages.totalPageCount }页</div>
 					</div>
 					<div class="col-sm-7">

@@ -82,165 +82,180 @@
         values(#{appId},#{versionNo},#{versionIfno},#{publishStatus},#{downloadLink},
         #{versionSize},#{apkLocPath},#{apkFileName},#{createdBy},#{creationDate})
     </insert>
-    <select id="selectappversion" resultType="com.bdqn.mapper.AppVersion">
+    <select id="selectappversion" resultType="java.lang.Integer">
         select MAX(id) from app_version
     </select>
-<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    &lt;!&ndash;@mbg.generated&ndash;&gt;
-    delete from app_version
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bdqn.mapper.AppVersion" useGeneratedKeys="true">
-    &lt;!&ndash;@mbg.generated&ndash;&gt;
-    insert into app_version (app_id, version_no, version_ifno, 
-      publish_status, download_link, version_size, 
-      created_by, creation_date, modify_by, 
-      modify_date, apk_loc_path, apk_file_name
-      )
-    values (#{appId,jdbcType=BIGINT}, #{versionNo,jdbcType=VARCHAR}, #{versionIfno,jdbcType=VARCHAR}, 
-      #{publishStatus,jdbcType=BIGINT}, #{downloadLink,jdbcType=VARCHAR}, #{versionSize,jdbcType=DECIMAL}, 
-      #{createdBy,jdbcType=BIGINT}, #{creationDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, 
-      #{modifyDate,jdbcType=TIMESTAMP}, #{apkLocPath,jdbcType=VARCHAR}, #{apkFileName,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bdqn.mapper.AppVersion" useGeneratedKeys="true">
-    &lt;!&ndash;@mbg.generated&ndash;&gt;
-    insert into app_version
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="appId != null">
-        app_id,
-      </if>
-      <if test="versionNo != null">
-        version_no,
-      </if>
-      <if test="versionIfno != null">
-        version_ifno,
-      </if>
-      <if test="publishStatus != null">
-        publish_status,
-      </if>
-      <if test="downloadLink != null">
-        download_link,
-      </if>
-      <if test="versionSize != null">
-        version_size,
-      </if>
-      <if test="createdBy != null">
-        created_by,
-      </if>
-      <if test="creationDate != null">
-        creation_date,
-      </if>
-      <if test="modifyBy != null">
-        modify_by,
-      </if>
-      <if test="modifyDate != null">
-        modify_date,
-      </if>
-      <if test="apkLocPath != null">
-        apk_loc_path,
-      </if>
-      <if test="apkFileName != null">
-        apk_file_name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="appId != null">
-        #{appId,jdbcType=BIGINT},
-      </if>
-      <if test="versionNo != null">
-        #{versionNo,jdbcType=VARCHAR},
-      </if>
-      <if test="versionIfno != null">
-        #{versionIfno,jdbcType=VARCHAR},
-      </if>
-      <if test="publishStatus != null">
-        #{publishStatus,jdbcType=BIGINT},
-      </if>
-      <if test="downloadLink != null">
-        #{downloadLink,jdbcType=VARCHAR},
-      </if>
-      <if test="versionSize != null">
-        #{versionSize,jdbcType=DECIMAL},
-      </if>
-      <if test="createdBy != null">
-        #{createdBy,jdbcType=BIGINT},
-      </if>
-      <if test="creationDate != null">
-        #{creationDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyBy != null">
-        #{modifyBy,jdbcType=BIGINT},
-      </if>
-      <if test="modifyDate != null">
-        #{modifyDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="apkLocPath != null">
-        #{apkLocPath,jdbcType=VARCHAR},
-      </if>
-      <if test="apkFileName != null">
-        #{apkFileName,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelectives" parameterType="com.bdqn.mapper.AppVersion">
-    &lt;!&ndash;@mbg.generated&ndash;&gt;
-    update app_version
-    <set>
-      <if test="appId != null">
-        app_id = #{appId,jdbcType=BIGINT},
-      </if>
-      <if test="versionNo != null">
-        version_no = #{versionNo,jdbcType=VARCHAR},
-      </if>
-      <if test="versionIfno != null">
-        version_ifno = #{versionIfno,jdbcType=VARCHAR},
-      </if>
-      <if test="publishStatus != null">
-        publish_status = #{publishStatus,jdbcType=BIGINT},
-      </if>
-      <if test="downloadLink != null">
-        download_link = #{downloadLink,jdbcType=VARCHAR},
-      </if>
-      <if test="versionSize != null">
-        version_size = #{versionSize,jdbcType=DECIMAL},
-      </if>
-      <if test="createdBy != null">
-        created_by = #{createdBy,jdbcType=BIGINT},
-      </if>
-      <if test="creationDate != null">
-        creation_date = #{creationDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyBy != null">
-        modify_by = #{modifyBy,jdbcType=BIGINT},
-      </if>
-      <if test="modifyDate != null">
-        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="apkLocPath != null">
-        apk_loc_path = #{apkLocPath,jdbcType=VARCHAR},
-      </if>
-      <if test="apkFileName != null">
-        apk_file_name = #{apkFileName,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.bdqn.mapper.AppVersion">
-    &lt;!&ndash;@mbg.generated&ndash;&gt;
-    update app_version
-    set app_id = #{appId,jdbcType=BIGINT},
-      version_no = #{versionNo,jdbcType=VARCHAR},
-      version_ifno = #{versionIfno,jdbcType=VARCHAR},
-      publish_status = #{publishStatus,jdbcType=BIGINT},
-      download_link = #{downloadLink,jdbcType=VARCHAR},
-      version_size = #{versionSize,jdbcType=DECIMAL},
-      created_by = #{createdBy,jdbcType=BIGINT},
-      creation_date = #{creationDate,jdbcType=TIMESTAMP},
-      modify_by = #{modifyBy,jdbcType=BIGINT},
-      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
-      apk_loc_path = #{apkLocPath,jdbcType=VARCHAR},
-      apk_file_name = #{apkFileName,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>-->
+    <update id="updateappversions">
+        update   app_info set version_id=#{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateStatusById">
+        update app_info set
+        <if test="saleSwitch=='close'">
+            `status`=5,off_sale_date=now() where id=#{id,jdbcType=BIGINT}
+        </if>
+    </update>
+    <update id="updateStatusById1">
+        update app_info set
+        <if test="saleSwitch == 'open'">
+            `status`=4,on_sale_date=now(),off_sale_date=null where id=#{id,jdbcType=BIGINT}
+        </if>
+    </update>
+    <!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        &lt;!&ndash;@mbg.generated&ndash;&gt;
+        delete from app_version
+        where id = #{id,jdbcType=BIGINT}
+      </delete>
+      <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bdqn.mapper.AppVersion" useGeneratedKeys="true">
+        &lt;!&ndash;@mbg.generated&ndash;&gt;
+        insert into app_version (app_id, version_no, version_ifno,
+          publish_status, download_link, version_size,
+          created_by, creation_date, modify_by,
+          modify_date, apk_loc_path, apk_file_name
+          )
+        values (#{appId,jdbcType=BIGINT}, #{versionNo,jdbcType=VARCHAR}, #{versionIfno,jdbcType=VARCHAR},
+          #{publishStatus,jdbcType=BIGINT}, #{downloadLink,jdbcType=VARCHAR}, #{versionSize,jdbcType=DECIMAL},
+          #{createdBy,jdbcType=BIGINT}, #{creationDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT},
+          #{modifyDate,jdbcType=TIMESTAMP}, #{apkLocPath,jdbcType=VARCHAR}, #{apkFileName,jdbcType=VARCHAR}
+          )
+      </insert>
+      <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bdqn.mapper.AppVersion" useGeneratedKeys="true">
+        &lt;!&ndash;@mbg.generated&ndash;&gt;
+        insert into app_version
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="appId != null">
+            app_id,
+          </if>
+          <if test="versionNo != null">
+            version_no,
+          </if>
+          <if test="versionIfno != null">
+            version_ifno,
+          </if>
+          <if test="publishStatus != null">
+            publish_status,
+          </if>
+          <if test="downloadLink != null">
+            download_link,
+          </if>
+          <if test="versionSize != null">
+            version_size,
+          </if>
+          <if test="createdBy != null">
+            created_by,
+          </if>
+          <if test="creationDate != null">
+            creation_date,
+          </if>
+          <if test="modifyBy != null">
+            modify_by,
+          </if>
+          <if test="modifyDate != null">
+            modify_date,
+          </if>
+          <if test="apkLocPath != null">
+            apk_loc_path,
+          </if>
+          <if test="apkFileName != null">
+            apk_file_name,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="appId != null">
+            #{appId,jdbcType=BIGINT},
+          </if>
+          <if test="versionNo != null">
+            #{versionNo,jdbcType=VARCHAR},
+          </if>
+          <if test="versionIfno != null">
+            #{versionIfno,jdbcType=VARCHAR},
+          </if>
+          <if test="publishStatus != null">
+            #{publishStatus,jdbcType=BIGINT},
+          </if>
+          <if test="downloadLink != null">
+            #{downloadLink,jdbcType=VARCHAR},
+          </if>
+          <if test="versionSize != null">
+            #{versionSize,jdbcType=DECIMAL},
+          </if>
+          <if test="createdBy != null">
+            #{createdBy,jdbcType=BIGINT},
+          </if>
+          <if test="creationDate != null">
+            #{creationDate,jdbcType=TIMESTAMP},
+          </if>
+          <if test="modifyBy != null">
+            #{modifyBy,jdbcType=BIGINT},
+          </if>
+          <if test="modifyDate != null">
+            #{modifyDate,jdbcType=TIMESTAMP},
+          </if>
+          <if test="apkLocPath != null">
+            #{apkLocPath,jdbcType=VARCHAR},
+          </if>
+          <if test="apkFileName != null">
+            #{apkFileName,jdbcType=VARCHAR},
+          </if>
+        </trim>
+      </insert>
+      <update id="updateByPrimaryKeySelectives" parameterType="com.bdqn.mapper.AppVersion">
+        &lt;!&ndash;@mbg.generated&ndash;&gt;
+        update app_version
+        <set>
+          <if test="appId != null">
+            app_id = #{appId,jdbcType=BIGINT},
+          </if>
+          <if test="versionNo != null">
+            version_no = #{versionNo,jdbcType=VARCHAR},
+          </if>
+          <if test="versionIfno != null">
+            version_ifno = #{versionIfno,jdbcType=VARCHAR},
+          </if>
+          <if test="publishStatus != null">
+            publish_status = #{publishStatus,jdbcType=BIGINT},
+          </if>
+          <if test="downloadLink != null">
+            download_link = #{downloadLink,jdbcType=VARCHAR},
+          </if>
+          <if test="versionSize != null">
+            version_size = #{versionSize,jdbcType=DECIMAL},
+          </if>
+          <if test="createdBy != null">
+            created_by = #{createdBy,jdbcType=BIGINT},
+          </if>
+          <if test="creationDate != null">
+            creation_date = #{creationDate,jdbcType=TIMESTAMP},
+          </if>
+          <if test="modifyBy != null">
+            modify_by = #{modifyBy,jdbcType=BIGINT},
+          </if>
+          <if test="modifyDate != null">
+            modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+          </if>
+          <if test="apkLocPath != null">
+            apk_loc_path = #{apkLocPath,jdbcType=VARCHAR},
+          </if>
+          <if test="apkFileName != null">
+            apk_file_name = #{apkFileName,jdbcType=VARCHAR},
+          </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+      </update>
+      <update id="updateByPrimaryKey" parameterType="com.bdqn.mapper.AppVersion">
+        &lt;!&ndash;@mbg.generated&ndash;&gt;
+        update app_version
+        set app_id = #{appId,jdbcType=BIGINT},
+          version_no = #{versionNo,jdbcType=VARCHAR},
+          version_ifno = #{versionIfno,jdbcType=VARCHAR},
+          publish_status = #{publishStatus,jdbcType=BIGINT},
+          download_link = #{downloadLink,jdbcType=VARCHAR},
+          version_size = #{versionSize,jdbcType=DECIMAL},
+          created_by = #{createdBy,jdbcType=BIGINT},
+          creation_date = #{creationDate,jdbcType=TIMESTAMP},
+          modify_by = #{modifyBy,jdbcType=BIGINT},
+          modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+          apk_loc_path = #{apkLocPath,jdbcType=VARCHAR},
+          apk_file_name = #{apkFileName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+      </update>-->
 </mapper>

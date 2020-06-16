@@ -32,7 +32,7 @@ public class logincontroller {
 
     @RequestMapping(value = "zhuxiao")
     public String zhuxiao(){
-        return "devlogin";
+        return "index";
     }
 
     /**

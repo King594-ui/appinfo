@@ -36,6 +36,8 @@ public interface appDataDictionaryColler {
     int delapp(@Param("id") Long id);
     //查看方法
     AppInfo appdevloperchaxun(@Param("id") Long id);
+    //后台查看
+    AppInfo appdevloperchaxun1(@Param("id") Long id);
     //查看版本方法
     List<AppVersion> getAppVersionList(@Param("appId") Long appId);
     //修改方法
@@ -52,4 +54,11 @@ public interface appDataDictionaryColler {
     int insertversion(AppVersion appVersion);
     //新增版本方法1
     int selectappversion();
+    //新增版本方法2
+    int updateappversions(@Param("id") Long id);
+    //上下架
+    int updateStatusById(@Param("id") Long id,@Param("saleSwitch") String saleSwitch);
+    //上下架1
+    int updateStatusById1(@Param("id") Long id,@Param("saleSwitch") String saleSwitch);
+
 }

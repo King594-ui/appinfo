@@ -94,4 +94,25 @@ public class appdevDictionaryImpl implements appdevDictionary{
     public int selectappversion() {
         return appDataDictionaryColler.selectappversion();
     }
+
+    @Override
+    public int updateappversions(Long id) {
+        return appDataDictionaryColler.updateappversions(id);
+    }
+
+    @Override
+    public int updateStatusById(Long id, String saleSwitch) {
+        return appDataDictionaryColler.updateStatusById(id,saleSwitch);
+    }
+
+    @Override
+    public int updateStatusById1(Long id, String saleSwitch) {
+        return appDataDictionaryColler.updateStatusById1(id,saleSwitch);
+    }
+
+
+    @Override
+    public AppInfo appdevloperchaxun1(Long id) {
+        return appDataDictionaryColler.appdevloperchaxun1(id);
+    }
 }

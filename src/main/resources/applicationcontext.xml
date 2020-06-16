@@ -64,7 +64,11 @@
             <!--配置拦截路径-->
             <mvc:mapping path="/**"/>
             <!--配置不拦截路径-->
+            <mvc:exclude-mapping path="/kaifadenglu"/>
+            <mvc:exclude-mapping path="/denglu1"/>
             <mvc:exclude-mapping path="/denglu"/>
+            <mvc:exclude-mapping path="/list"/>
+            <mvc:exclude-mapping path="/qiao"/>
             <mvc:exclude-mapping path="/denglulu"/>
             <mvc:exclude-mapping path="/statics/**"/>
             <bean class="com.bdqn.sysinterceptor.SysInterceptor"/>

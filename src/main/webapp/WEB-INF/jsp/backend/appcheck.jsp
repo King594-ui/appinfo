@@ -14,7 +14,7 @@
           <div class="clearfix"></div>
       </div>
       <div class="x_content1">
-        <form class="form-horizontal form-label-left" action="checksave" method="post">
+        <form class="form-horizontal form-label-left" action="/qiao" method="post">
           <input type="hidden" name="id" value="${appInfo.id}">
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">软件名称 <span class="required">*</span>
@@ -29,7 +29,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="text" class="form-control col-md-7 col-xs-12" 
-              value="${appInfo.APKName}" readonly="readonly">
+              value="${appInfo.apkName}" readonly="readonly">
             </div>
           </div>
           
@@ -38,7 +38,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input class="form-control col-md-7 col-xs-12" 
-              	value="${appInfo.supportROM}" type="text" readonly="readonly">
+              	value="${appInfo.supportRom}" type="text" readonly="readonly">
             </div>
           </div>
           <div class="item form-group">
@@ -137,7 +137,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">版本号 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input class="form-control col-md-7 col-xs-12" value="${appVersion.versionNo }" 
+              <input class="form-control col-md-7 col-xs-12" value="${appVersion.versionNo }"
               type="text" readonly="readonly" >
             </div>
           </div>
@@ -161,7 +161,7 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <textarea class="form-control col-md-7 col-xs-12">
-              ${appVersion.versionInfo }</textarea>
+              ${appVersion.versionIfno }</textarea>
             </div>
           </div>
            <div class="item form-group">

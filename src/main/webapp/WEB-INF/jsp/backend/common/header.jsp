@@ -12,7 +12,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>APP后台管理系统</title>
-
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath }/statics/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -62,7 +61,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> APP管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="${pageContext.request.contextPath }/list">APP审核</a></li>
+                      <li><a href="${pageContext.request.contextPath }/qiao">APP审核</a></li>
                       <li><a href="javascript:;">广告推广</a></li>
                     </ul>
                   </li>
@@ -119,7 +118,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="${pageContext.request.contextPath }/manager/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="${pageContext.request.contextPath }zhuxiao"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 

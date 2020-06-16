@@ -1,4 +1,5 @@
 package com.bdqn.sysinterceptor;
+import com.bdqn.mapper.BackendUser;
 import com.bdqn.mapper.DevUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,8 +28,9 @@ public class SysInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         DevUser user=(DevUser) request.getSession().getAttribute("devUserSession");
+        BackendUser user1= (BackendUser) request.getSession().getAttribute("userSession");
         logger.info("进入拦截器");
-        if(user!=null){
+        if(user!=null || user1!=null){
             logger.info("通过，放行");
             return  true;
         }else{

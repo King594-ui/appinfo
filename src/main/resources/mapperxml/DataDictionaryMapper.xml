@@ -56,6 +56,22 @@
               </if>
          </where>
   </select>
+    <select id="appdevloperchaxun1" resultType="com.bdqn.mapper.AppInfo">
+        select * ,
+        (select dev_name from dev_user where id = a.dev_id) as devName,
+        (select value_name from data_dictionary d where  a.status=d.value_id AND d.type_code='APP_STATUS') as statusName,
+        (select value_name from data_dictionary d where  a.status=d.value_id AND d.type_code='APP_FLATFORM') as flatformName,
+        (select category_name from app_category c where  c.id=a.category_level1) as categoryLevel1Name,
+        (select category_name from app_category c where  c.id=a.category_level2) as categoryLevel2Name,
+        (select category_name from app_category c where  c.id=a.category_level3) as categoryLevel3Name,
+        (select v.version_no from app_version v where v.id=a.version_id ) as versionNo
+        from app_info a
+        <where>
+            <if test="id != null">
+                and a.id = #{id}
+            </if>
+        </where>
+    </select>
     <select id="getAppVersionList" resultType="com.bdqn.mapper.AppVersion">
         select v.*,
         (select a.software_name from app_info a where a.id=v.app_id ) as appName,

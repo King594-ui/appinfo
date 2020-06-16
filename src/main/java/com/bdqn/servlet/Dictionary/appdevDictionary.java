@@ -45,4 +45,12 @@ public interface appdevDictionary {
     int insertversion(AppVersion appVersion);
     //新增版本方法1
     int selectappversion();
+    //新增版本方法2
+    int updateappversions(Long id);
+    //上下架
+    int updateStatusById(Long id, String saleSwitch);
+    //上下架1
+    int updateStatusById1( Long id, String saleSwitch);
+    //后台查看
+    AppInfo appdevloperchaxun1( Long id);
 }

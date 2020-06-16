@@ -411,8 +411,11 @@ public class devloperAddController {
      * @return
      */
     @RequestMapping("/appversionadd")
-    public String appversionadd(){
-
+    public String appversionadd(Model model,HttpServletRequest request){
+        String id=request.getParameter("id");
+        List<AppVersion> appVersionList = null;
+        appVersionList=appDataDictionaryColler.getappVersionUpdate1(Long.valueOf(id),null);
+        model.addAttribute("appVersionList",appVersionList);
         return "developer/appversionadd";
     }
 
@@ -457,6 +460,7 @@ public class devloperAddController {
                 }
                 apkLocPath = request.getContextPath()+"/statics/uploadfiles/"+fileName;
                 downloadLink = path+File.separator+fileName;
+
             }else{
                 request.setAttribute("uploadFileError","上传apk格式不正确");
                 return "developer/appversionadd";
@@ -469,46 +473,56 @@ public class devloperAddController {
         appVersion.setDownloadLink(downloadLink);
         int count=appDataDictionaryColler.insertversion(appVersion);
         if(count>0){
-            int sum=appDataDictionaryColler.selectappversion();
-            return "redirect:/list1";
+            long sum=appDataDictionaryColler.selectappversion();
+            int count1=appDataDictionaryColler.updateappversions(sum);
+            if(count1>0){
+                return "redirect:/list1";
+            }
+            return "developer/appversionadd";
         }else{
             return "developer/appversionadd";
         }
     }
 
-
-   /* @RequestMapping(value="/{appid}/sale",method=RequestMethod.PUT)
+    /**
+     * 上下架
+     * @param
+     * @param
+     * @return
+     */
+    @RequestMapping("{appId}/{saleSwitch}/sale.json")
     @ResponseBody
-    public Object sale(@PathVariable String appid,HttpSession session){
-        HashMap<String, Object> resultMap = new HashMap<String, Object>();
-        Long appIdInteger = null;
-            appIdInteger = Long.parseLong(appid);
-        resultMap.put("errorCode", "0");
-        resultMap.put("appId", appid);
-        if(appIdInteger>0){
-            try {
-                DevUser devUser = (DevUser)session.getAttribute("devUserSession");
-                AppInfo appInfo = new AppInfo();
-                appInfo.setId(appIdInteger);
-                appInfo.setModifyBy(devUser.getId());
-                if(appDataDictionaryColler.appsysUpdateSaleStatusByAppId(appInfo)){
-                    resultMap.put("resultMsg", "success");
-                }else{
-                    resultMap.put("resultMsg", "success");
-                }
-            } catch (Exception e) {
-                resultMap.put("errorCode", "exception000001");
-            }
+    public Object sale(@PathVariable("appId") Long appId,@PathVariable("saleSwitch") String saleSwitch){
+//String saleSwitch=request.getParameter("saleSwitch");
+
+        System.out.println(saleSwitch);
+        int i=0;
+        if(saleSwitch.equals("open")){
+            i=appDataDictionaryColler.updateStatusById1(appId,saleSwitch);
         }else{
-            resultMap.put("errorCode", "param000001");
+            i = appDataDictionaryColler.updateStatusById(appId,saleSwitch);
         }
-        return resultMap;
-    }*/
+        Map<String,String> reslut=new HashMap();
+        if(!StringUtils.isNullOrEmpty(appId.toString())&&!StringUtils.isNullOrEmpty(saleSwitch)){
+            reslut.put("errorCode","0");
+               if(i>0){
+                    reslut.put("resultMsg","success");
+                }else{
+                    reslut.put("resultMsg","failed");
+                }
+        }else {
+            reslut.put("errorCode","param000001");
+        }
+        return JSONArray.toJSONString(reslut);
+    }
     /*@RequestMapping("/appversionmodify/{vid}/{aid}")
     public String appversionmodify(HttpServletRequest request,@PathVariable Long vid,@PathVariable Long aid,Model model){
         AppVersion appVersion=appDataDictionaryColler.getappVersionUpdate(vid);
         System.out.println(appVersion);
         model.addAttribute("appVersion",appVersion);
+
+
+        resultMap.put("appId", appid);
         return "developer/appversionmodify";
     }*/
 }

@@ -88,30 +88,26 @@ $(".modifyAppInfo").on("click",function(){
 });
 
 $(document).on("click",".saleSwichOpen,.saleSwichClose",function(){
+	alert("卢桥1")
 	var obj = $(this);
 	var appinfoid = obj.attr("appinfoid");
 	var saleSwitch = obj.attr("saleSwitch");
 	if("open" === saleSwitch){
-		saleSwitchAjax(appinfoid,obj);
+		saleSwitchAjax(appinfoid,obj,saleSwitch);
 	}else if("close" === saleSwitch){
 		if(confirm("你确定要下架您的APP应用【"+obj.attr("appsoftwarename")+"】吗？")){
-			saleSwitchAjax(appinfoid,obj);
+			saleSwitchAjax(appinfoid,obj,saleSwitch);
 		}
 	}
 });
 
-var saleSwitchAjax = function(appId,obj){
+var saleSwitchAjax = function(appId,obj,saleSwitch){
+	alert("卢桥");
 	$.ajax({
 		type:"PUT",
-		url:appId+"/sale.json",
+		url:appId+"/"+saleSwitch+"/sale.json/",
 		dataType:"json",
 		success:function(data){
-			/*
-			 * resultMsg:success/failed
-			 * errorCode:exception000001
-			 * appId:appId
-			 * errorCode:param000001
-			 */
 			if(data.errorCode === '0'){
 				if(data.resultMsg === "success"){//操作成功
 					if("open" === obj.attr("saleSwitch")){
