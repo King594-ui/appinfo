@@ -5,6 +5,7 @@ import com.bdqn.mapper.*;
 import com.bdqn.servlet.appdevUser;
 import com.bdqn.tools.PageSupport;
 import com.mysql.cj.util.StringUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,8 @@ import java.util.List;
 @Controller
 public class BackendController {
 
+    @Resource
+    private RedisTemplate redisTemplate;
     @Resource
     private appdevUser appdevUser;
     @Resource
@@ -49,6 +52,8 @@ public class BackendController {
         String password=request.getParameter("userPassword");
         BackendUser backendUser= appdevUser.login1(name,password);
         if (backendUser!=null){
+            redisTemplate.opsForValue().set("name1",name);
+            redisTemplate.opsForValue().set("pass1",password);
             request.getSession().setAttribute("userSession",backendUser);
             return "backend/main";
         }else{
