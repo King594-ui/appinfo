@@ -8,9 +8,7 @@ import com.mysql.cj.util.StringUtils;
 import com.sun.org.apache.bcel.internal.classfile.Code;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.*;
+import java.util.logging.LogManager;
 
 /**
  * @author 啊桥哦
@@ -29,7 +28,7 @@ import java.util.*;
  */
 @Controller
 public class devloperAddController {
-    private Logger logger= (Logger) LogManager.getLogger(devloperAddController.class);
+//    private Logger logger= (Logger) LogManager.getLogger(devloperAddController.class);
     @Resource
     private com.bdqn.servlet.appdevUser appdevUser;
     @Resource
@@ -76,6 +75,7 @@ public class devloperAddController {
         List<DataDictionary> lis=appDataDictionaryColler.getappdatadictionlist(tcode);
         return JSONArray.toJSONString(lis);
     }
+
     /**
      * 加载平台列表何(修改用)
      * @param request

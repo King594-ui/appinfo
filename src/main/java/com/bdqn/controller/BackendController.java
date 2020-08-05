@@ -1,18 +1,22 @@
 package com.bdqn.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.bdqn.dao.appDataDictionaryColler;
 import com.bdqn.mapper.*;
 import com.bdqn.servlet.appdevUser;
 import com.bdqn.tools.PageSupport;
 import com.mysql.cj.util.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 啊桥哦
@@ -22,8 +26,11 @@ import java.util.List;
 @Controller
 public class BackendController {
 
-    @Resource
-    private RedisTemplate redisTemplate;
+
+//    private StringRedisTemplate stringRedisTemplate;
+//    private RedisTemplate redisTemplate;
+
+
     @Resource
     private appdevUser appdevUser;
     @Resource
@@ -33,7 +40,6 @@ public class BackendController {
     public String lists(){
         return "backend/applist";
     }
-
 
     @RequestMapping(value = "denglu1")
     public String denglu1(){
@@ -52,8 +58,11 @@ public class BackendController {
         String password=request.getParameter("userPassword");
         BackendUser backendUser= appdevUser.login1(name,password);
         if (backendUser!=null){
-            redisTemplate.opsForValue().set("name1",name);
-            redisTemplate.opsForValue().set("pass1",password);
+            Map<String,String> resultmap=new HashMap<String,String>();
+            resultmap.put("name1",name);
+            resultmap.put("pass1",password);
+            String qiao= JSONArray.toJSONString(resultmap);
+//            stringRedisTemplate.opsForValue().set("luqiao1",qiao);
             request.getSession().setAttribute("userSession",backendUser);
             return "backend/main";
         }else{

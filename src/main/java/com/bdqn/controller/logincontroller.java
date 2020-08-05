@@ -1,15 +1,16 @@
 package com.bdqn.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.bdqn.mapper.DevUser;
 import com.bdqn.servlet.appdevUser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author 啊桥哦
@@ -18,9 +19,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class logincontroller {
-
     @Resource
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
+/*    @Resource
+    private RedisTemplate redisTemplate;*/
 
     @Resource
     private appdevUser appdevUser;
@@ -47,8 +49,13 @@ public class logincontroller {
         String pass=request.getParameter("devPassword");
             DevUser devUser= appdevUser.login(name,pass);
             if(devUser!=null){
-                redisTemplate.opsForValue().set("name",name);
-                redisTemplate.opsForValue().set("pass",pass);
+                Map<String,String> resultmap=new HashMap<String,String>();
+                resultmap.put("name",name);
+                resultmap.put("pass",pass);
+                String qiao= JSONArray.toJSONString(resultmap);
+//                stringRedisTemplate.opsForValue().set("luqiao",qiao);
+                /*redisTemplate.opsForValue().set("name",name);
+                redisTemplate.opsForValue().set("pass",pass);*/
                 request.getSession().setAttribute("devUserSession",devUser);
                 return "developer/main";
             }else{
